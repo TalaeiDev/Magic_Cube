@@ -7,6 +7,7 @@ using UnityEngine;
 public class RubicCubeBuilder : MonoBehaviour
 {
     public GameObject rubicPiece;
+    public Transform rubicCube;
     [Range (2,20)]
     public int rubicSize = 2;
     public float pieceSpace = 1f;
@@ -22,7 +23,7 @@ public class RubicCubeBuilder : MonoBehaviour
                 DestroyImmediate(pieceRoot);
 
             pieceRoot = new GameObject("Piece Root");
-            pieceRoot.transform.parent = GameManager.Instance.rubicCube;
+            pieceRoot.transform.parent = rubicCube;
 
             for (int y = 0; y < rubicSize; y++)
                 for (int x = 0; x < rubicSize; x++)

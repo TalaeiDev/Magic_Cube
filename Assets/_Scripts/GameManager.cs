@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Transform rubicCube;
-
     [HideInInspector]
     public Transform rotationTarget;
 

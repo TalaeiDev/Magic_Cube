@@ -5,6 +5,7 @@ using UnityEditor;
 public class RubicCubeBuilderEditor : Editor
 {
     SerializedProperty rubicPiece;
+    SerializedProperty rubicCube;
     SerializedProperty rubicSize;
     SerializedProperty pieceSpace;
 
@@ -17,6 +18,7 @@ public class RubicCubeBuilderEditor : Editor
         rubicPiece = serializedObject.FindProperty("rubicPiece");
         rubicSize = serializedObject.FindProperty("rubicSize");
         pieceSpace = serializedObject.FindProperty("pieceSpace");
+        rubicCube = serializedObject.FindProperty("rubicCube");
     }
 
     // Start is called before the first frame update
@@ -26,6 +28,9 @@ public class RubicCubeBuilderEditor : Editor
         GUILayout.BeginVertical("box");
         {
             EditorGUILayout.PropertyField(rubicPiece, new GUIContent("Piece Prefab", "Add Rubic Piece Prefab Want to Build"));
+            GUILayout.Space(10);
+
+            EditorGUILayout.PropertyField(rubicCube, new GUIContent("Rubic Cube", ""));
             GUILayout.Space(10);
 
             EditorGUILayout.PropertyField(rubicSize, new GUIContent("Rubic Size", "Set Rubic Cube grid size"));
