@@ -31,11 +31,11 @@ public class CubeMap : MonoBehaviour
         cubeState = FindObjectOfType<CubeState>();
 
         UpdateMap(cubeState.front, front);
-       // UpdateMap(cubeState.top, up);
-       // UpdateMap(cubeState.down, down);
-       // UpdateMap(cubeState.right, right);
-       // UpdateMap(cubeState.left, left);
-       // UpdateMap(cubeState.back, back);
+        UpdateMap(cubeState.top, up);
+        UpdateMap(cubeState.down, down);
+        UpdateMap(cubeState.right, right);
+        UpdateMap(cubeState.left, left);
+        UpdateMap(cubeState.back, back);
        
     }
 

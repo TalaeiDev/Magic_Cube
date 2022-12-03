@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject rubicPiece;
+    public GameObject emptyTransfrom;
+    public Transform rubicCube;
+    public List<GameObject> rayPoints;
+    public List<GameObject> frontRay;
+    public List<GameObject> backRay;
+
     [HideInInspector]
     public Transform rotationTarget;
 

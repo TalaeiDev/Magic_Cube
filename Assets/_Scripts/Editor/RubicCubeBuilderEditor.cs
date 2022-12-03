@@ -4,8 +4,7 @@ using UnityEditor;
 [CustomEditor(typeof(RubicCubeBuilder))]
 public class RubicCubeBuilderEditor : Editor
 {
-    SerializedProperty rubicPiece;
-    SerializedProperty rubicCube;
+    SerializedProperty gameManager;
     SerializedProperty rubicSize;
     SerializedProperty pieceSpace;
 
@@ -15,10 +14,9 @@ public class RubicCubeBuilderEditor : Editor
     {
         rubicCubeBuilder = (RubicCubeBuilder)target;
 
-        rubicPiece = serializedObject.FindProperty("rubicPiece");
+        gameManager = serializedObject.FindProperty("gameManager");
         rubicSize = serializedObject.FindProperty("rubicSize");
         pieceSpace = serializedObject.FindProperty("pieceSpace");
-        rubicCube = serializedObject.FindProperty("rubicCube");
     }
 
     // Start is called before the first frame update
@@ -27,10 +25,7 @@ public class RubicCubeBuilderEditor : Editor
 
         GUILayout.BeginVertical("box");
         {
-            EditorGUILayout.PropertyField(rubicPiece, new GUIContent("Piece Prefab", "Add Rubic Piece Prefab Want to Build"));
-            GUILayout.Space(10);
-
-            EditorGUILayout.PropertyField(rubicCube, new GUIContent("Rubic Cube", ""));
+            EditorGUILayout.PropertyField(gameManager, new GUIContent("Game Manager", "Add Rubic Piece Prefab Want to Build"));
             GUILayout.Space(10);
 
             EditorGUILayout.PropertyField(rubicSize, new GUIContent("Rubic Size", "Set Rubic Cube grid size"));

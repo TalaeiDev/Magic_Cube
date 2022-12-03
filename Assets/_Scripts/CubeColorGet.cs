@@ -12,8 +12,10 @@ public class CubeColorGet : MonoBehaviour
     public Transform backPoint;
 
     public GameObject emptyGo;
+    public Transform pieceRoot;
 
     public LayerMask layerMask;
+    public RubicCubeBuilder cubeBuilder;
 
     private List<GameObject> frontRay = new List<GameObject>();
     private List<GameObject> backRay = new List<GameObject>();
@@ -24,6 +26,8 @@ public class CubeColorGet : MonoBehaviour
 
     CubeState cubeState;
     CubeMap cubeMap;
+
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,25 +41,24 @@ public class CubeColorGet : MonoBehaviour
         cubeState = FindObjectOfType<CubeState>();
         cubeMap = FindObjectOfType<CubeMap>();
 
-        cubeState.front = ReadFace(frontRay, frontPoint);
-        cubeState.back = ReadFace(backRay, backPoint);
-        cubeState.top = ReadFace(upRay, topPoint);
-        cubeState.down = ReadFace(downRay, downPoint);
-        cubeState.right = ReadFace(rightRay, rightPoint);
-        cubeState.left = ReadFace(leftRay, leftPoint);
-
-        cubeMap.SetMap();
+        cubeState.front = ReadFace(gameManager.frontRay, gameManager.rayPoints[0].transform);
+       cubeState.back = ReadFace(gameManager.backRay, gameManager.rayPoints[1].transform);
+      // cubeState.top = ReadFace(upRay, topPoint);
+       //cubeState.down = ReadFace(downRay, downPoint);
+       //cubeState.right = ReadFace(rightRay, rightPoint);
+       //cubeState.left = ReadFace(leftRay, leftPoint);
+       //
+        //cubeMap.SetMap();
     }
 
     void SetRayTransforms()
     {
-        upRay = BuildRays(topPoint, new Vector3(90, 90, 0));
-        frontRay = BuildRays(frontPoint, new Vector3(0, 180, 90));
-        //frontPoint.position = new Vector3(-3 + 1.5f, 3 - 1.5f, 3 + 1.5f);
-        backRay = BuildRays(backPoint, new Vector3(0, 270, 0));
-        rightRay = BuildRays(rightPoint, new Vector3(0, 0, 0));
-        leftRay = BuildRays(leftPoint, new Vector3(0, 180, 0));
-        downRay = BuildRays(downPoint, new Vector3(270, 90, 0));
+     // upRay = BuildRays(topPoint, new Vector3(90, 90, 0));
+     // frontRay = BuildRays(frontPoint, new Vector3(0, 180, 90));
+      //backRay = BuildRays(backPoint, new Vector3(0, 270, 0));
+      //rightRay = BuildRays(rightPoint, new Vector3(0, 0, 0));
+      //leftRay = BuildRays(leftPoint, new Vector3(0, 180, 0));
+      //downRay = BuildRays(downPoint, new Vector3(270, 90, 0));
     }
 
     // Update is called once per frame
@@ -96,11 +99,11 @@ public class CubeColorGet : MonoBehaviour
 
         List<GameObject> rays = new List<GameObject>();
 
-        for(int y =1; y > -1; y--)
+        for(int y =1; y > -(cubeBuilder.rubicSize-1); y--)
         {
-            for (int x=-1; x<1; x++)
+            for (int x=-1; x<cubeBuilder.rubicSize-1; x++)
             {
-                Vector3 startPos = new Vector3(rayTransform.localPosition.x + ((float)x - 0.5f), rayTransform.localPosition.y + ((float)y -0.5f), rayTransform.localPosition.z);
+                Vector3 startPos = new Vector3(rayTransform.localPosition.x + x, rayTransform.localPosition.y + y, rayTransform.localPosition.z);
                 GameObject rayStart = Instantiate(emptyGo, startPos, Quaternion.identity, rayTransform);
                 rayStart.name = rayCount.ToString();
                 rays.Add(rayStart);
@@ -109,6 +112,8 @@ public class CubeColorGet : MonoBehaviour
         }
 
         rayTransform.localRotation = Quaternion.Euler(Diraction);
+        rayTransform.parent = pieceRoot;
+        rayTransform.localPosition = new Vector3((float)cubeBuilder.rubicSize-2, 1, 6);
         return rays;
     }
 
@@ -118,12 +123,14 @@ public class CubeColorGet : MonoBehaviour
         foreach(GameObject rayStart in listStarts)
         {
             //Transform rayTransform = frontPoint;
+            
             Vector3 ray = rayStart.transform.position;
             RaycastHit hit;
+            Debug.DrawRay(ray, rayTransform.forward * 2, Color.red);
             //Debug.DrawRay(ray, -frontPoint.forward * 10, Color.yellow);
             if (Physics.Raycast(ray, rayTransform.forward, out hit, Mathf.Infinity, layerMask))
             {
-                Debug.DrawRay(ray, rayTransform.forward * 10, Color.yellow);
+                Debug.DrawRay(ray, rayTransform.forward * 2, Color.yellow);
                 faceHit.Add(hit.collider.gameObject);
             }
            
