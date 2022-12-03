@@ -46,33 +46,33 @@ public class CubeMap : MonoBehaviour
         {
             if(face[i].name[0] == 'F')
             {
-                t.GetComponent<Image>().color = new Color(1, 0.5f, 0,1);
+                t.GetComponent<Image>().color = Color.red;
             }
 
-           // if (face[i].name[0] == 'B')
-           // {
-           //     t.GetComponent<Image>().color = Color.red;
-           // }
-           //
-           // if (face[i].name[0] == 'U')
-           // {
-           //     t.GetComponent<Image>().color = Color.yellow;
-           // }
-           //
-           // if (face[i].name[0] == 'D')
-           // {
-           //     t.GetComponent<Image>().color = Color.white;
-           // }
-           //
-           // if (face[i].name[0] == 'L')
-           // {
-           //     t.GetComponent<Image>().color = Color.green;
-           // }
-           //
-           // if (face[i].name[0] == 'R')
-           // {
-           //     t.GetComponent<Image>().color = Color.blue;
-           // }
+            if (face[i].name[0] == 'B')
+            {
+                t.GetComponent<Image>().color = Color.blue;
+            }
+           
+            if (face[i].name[0] == 'T')
+            {
+                t.GetComponent<Image>().color = Color.green;
+            }
+           
+            if (face[i].name[0] == 'D')
+            {
+                t.GetComponent<Image>().color = Color.white;
+            }
+           
+            if (face[i].name[0] == 'L')
+            {
+                t.GetComponent<Image>().color = new Color(1, 0.5f, 0, 1);
+            }
+           
+            if (face[i].name[0] == 'R')
+            {
+                t.GetComponent<Image>().color = Color.yellow;
+            }
             i++;
         }
     }

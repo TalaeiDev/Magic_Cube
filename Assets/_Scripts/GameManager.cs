@@ -9,8 +9,13 @@ public class GameManager : MonoBehaviour
     public GameObject emptyTransfrom;
     public Transform rubicCube;
     public List<GameObject> rayPoints;
+
     public List<GameObject> frontRay;
     public List<GameObject> backRay;
+    public List<GameObject> upRay;
+    public List<GameObject> downRay;
+    public List<GameObject> rightRay;
+    public List<GameObject> leftRay;
 
     [HideInInspector]
     public Transform rotationTarget;

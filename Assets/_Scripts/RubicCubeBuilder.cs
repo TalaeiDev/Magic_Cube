@@ -36,7 +36,7 @@ public class RubicCubeBuilder : MonoBehaviour
 
             pieceRoot.transform.position = new Vector3(-pos, -pos, -pos);
 
-        for(int i=0; i < 2; i++)
+        for(int i=0; i < 6; i++)
         {
             GameObject raytransfrom = new GameObject("RayPoint");
             gameManager.rayPoints.Add(raytransfrom.gameObject);
@@ -46,6 +46,18 @@ public class RubicCubeBuilder : MonoBehaviour
 
             if (i == 1)
                 gameManager.backRay = BuildRaysPoints(raytransfrom.transform, gameManager.emptyTransfrom, i);
+
+            if (i == 2)
+                gameManager.upRay = BuildRaysPoints(raytransfrom.transform, gameManager.emptyTransfrom, i);
+
+            if (i == 3)
+                gameManager.downRay = BuildRaysPoints(raytransfrom.transform, gameManager.emptyTransfrom, i);
+
+            if (i == 4)
+                gameManager.rightRay = BuildRaysPoints(raytransfrom.transform, gameManager.emptyTransfrom, i);
+
+            if (i == 5)
+                gameManager.leftRay = BuildRaysPoints(raytransfrom.transform, gameManager.emptyTransfrom, i);
         }
       
     }
@@ -53,7 +65,12 @@ public class RubicCubeBuilder : MonoBehaviour
 
     List<GameObject> BuildRaysPoints(Transform rayTransform, GameObject emptyObject,int index)
     {
+        
+
         int rayCount = 0;
+
+        Vector3 rubicSumPosition = Vector3.zero;
+        Vector3 rubicCenter = Vector3.zero;
 
         List<GameObject> rays = new List<GameObject>();
 
@@ -61,7 +78,7 @@ public class RubicCubeBuilder : MonoBehaviour
         {
             for (int x = -1; x < rubicSize - 1; x++)
             {
-                Vector3 startPos = new Vector3(rayTransform.localPosition.x + x, rayTransform.localPosition.y + y, rayTransform.localPosition.z);
+                Vector3 startPos = new Vector3(rayTransform.position.x + x, rayTransform.position.y + y, rayTransform.localPosition.z);
                 GameObject rayStart = Instantiate(emptyObject, startPos, Quaternion.identity, rayTransform);
                 rayStart.name = rayCount.ToString();
                 rays.Add(rayStart);
@@ -69,53 +86,87 @@ public class RubicCubeBuilder : MonoBehaviour
             }
         }
 
-        switch(index)
+        switch (index)
         {
             case 0:
                 rayTransform.localRotation = Quaternion.Euler(new Vector3(0, 180, 90));
                 rayTransform.parent = pieceRoot.transform;
-                rayTransform.localPosition = new Vector3((float)rubicSize - 2, 1, rubicSize + 0.5f);
+                
+                foreach (Transform child in pieceRoot.transform)
+                    rubicSumPosition += child.position;
+
+                rubicCenter = rubicSumPosition / pieceRoot.transform.childCount;
+                rayTransform.position = new Vector3(rubicCenter.x, rubicCenter.y, rubicCenter.z + rubicSize);
+                rayTransform.localPosition = new Vector3((float)rubicSize - 2, 1, rayTransform.localPosition.z);
                 rayTransform.name = "FrontRay";
                 break;
 
             case 1:
-                rayTransform.localRotation = Quaternion.Euler(new Vector3(0, 0, 90));
+                rayTransform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
                 rayTransform.parent = pieceRoot.transform;
-                rayTransform.localPosition = new Vector3((float)rubicSize - 1, 1, -(rubicSize + 0.5f));
+
+                foreach (Transform child in pieceRoot.transform)
+                    rubicSumPosition += child.position;
+
+                rubicCenter = rubicSumPosition / pieceRoot.transform.childCount;
+                rayTransform.position = new Vector3(rubicCenter.x, rubicCenter.y, rubicCenter.z - rubicSize);
+                rayTransform.localPosition = new Vector3((float)rubicSize - 2, 1, rayTransform.localPosition.z);
                 rayTransform.name = "BackRay";
                 break;
 
-            case 3:
-                rayTransform.localRotation = Quaternion.Euler(new Vector3(0, 180, 90));
+            case 2:
+                rayTransform.localRotation = Quaternion.Euler(new Vector3(90, 90, 0));
                 rayTransform.parent = pieceRoot.transform;
-                rayTransform.localPosition = new Vector3((float)rubicSize - 2, 1, 6);
-                rayTransform.name = "FrontRay";
+
+                foreach (Transform child in pieceRoot.transform)
+                    rubicSumPosition += child.position;
+
+                rubicCenter = rubicSumPosition / pieceRoot.transform.childCount;
+                rayTransform.position = new Vector3(rubicCenter.x, rubicCenter.y + rubicSize, rubicCenter.z);
+                rayTransform.localPosition = new Vector3((float)rubicSize - 2, rayTransform.localPosition.y, (float)rubicSize - 2);
+                rayTransform.name = "UpRay";
+                break;
+
+            case 3:
+                rayTransform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 180));
+                rayTransform.parent = pieceRoot.transform;
+
+                foreach (Transform child in pieceRoot.transform)
+                    rubicSumPosition += child.position;
+
+                rubicCenter = rubicSumPosition / pieceRoot.transform.childCount;
+                rayTransform.position = new Vector3(rubicCenter.x, rubicCenter.y - rubicSize, rubicCenter.z);
+                rayTransform.localPosition = new Vector3((float)rubicSize - 2, rayTransform.localPosition.y, (float)rubicSize - 2);
+                rayTransform.name = "DownRay";
                 break;
 
             case 4:
-                rayTransform.localRotation = Quaternion.Euler(new Vector3(0, 180, 90));
+                rayTransform.localRotation = Quaternion.Euler(new Vector3(0, -90, -90));
                 rayTransform.parent = pieceRoot.transform;
-                rayTransform.localPosition = new Vector3((float)rubicSize - 2, 1, 6);
-                rayTransform.name = "FrontRay";
+
+                foreach (Transform child in pieceRoot.transform)
+                    rubicSumPosition += child.position;
+
+                rubicCenter = rubicSumPosition / pieceRoot.transform.childCount;
+                rayTransform.position = new Vector3(rubicCenter.x + rubicSize, rubicCenter.y, rubicCenter.z);
+                rayTransform.localPosition = new Vector3(rayTransform.localPosition.x, (float)rubicSize - 2, (float)rubicSize - 2);
+                rayTransform.name = "RightRay";
                 break;
 
             case 5:
-                rayTransform.localRotation = Quaternion.Euler(new Vector3(0, 180, 90));
+                rayTransform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
                 rayTransform.parent = pieceRoot.transform;
-                rayTransform.localPosition = new Vector3((float)rubicSize - 2, 1, 6);
-                rayTransform.name = "FrontRay";
-                break;
 
-            case 6:
-                rayTransform.localRotation = Quaternion.Euler(new Vector3(0, 180, 90));
-                rayTransform.parent = pieceRoot.transform;
-                rayTransform.localPosition = new Vector3((float)rubicSize - 2, 1, 6);
-                rayTransform.name = "FrontRay";
+                foreach (Transform child in pieceRoot.transform)
+                    rubicSumPosition += child.position;
+
+                rubicCenter = rubicSumPosition / pieceRoot.transform.childCount;
+                rayTransform.position = new Vector3(rubicCenter.x - rubicSize, rubicCenter.y, rubicCenter.z);
+                rayTransform.localPosition = new Vector3(rayTransform.localPosition.x, (float)rubicSize - 2, (float)rubicSize - 2);
+                rayTransform.name = "LeftRay";
                 break;
         }
-        //rayTransform.localRotation = Quaternion.Euler(Diraction);
-        //rayTransform.parent = pieceRoot;
-        //rayTransform.localPosition = new Vector3((float)cubeBuilder.rubicSize - 2, 1, 6);
+
         return rays;
     }
 }
