@@ -11,6 +11,13 @@ public class CubeState : MonoBehaviour
     public List<GameObject> left = new List<GameObject>();
     public List<GameObject> top = new List<GameObject>();
     public List<GameObject> down = new List<GameObject>();
+
+    public Transform pieceRoot;
+
+    Vector3 rubicSumPosition;
+    Vector3 rubicCenter;
+
+    public List<GameObject> fg;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +28,19 @@ public class CubeState : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PickUp(List<GameObject> cubeSide)
+    {
+        fg = cubeSide;
+        foreach (GameObject face in cubeSide)
+        {
+            
+                rubicSumPosition += face.transform.position;
+
+                rubicCenter = rubicSumPosition / pieceRoot.transform.childCount;
+                GameObject g = new GameObject("G");
+                g.transform.position = rubicCenter;
+        }
     }
 }
