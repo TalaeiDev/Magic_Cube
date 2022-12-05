@@ -33,14 +33,18 @@ public class CubeState : MonoBehaviour
     public void PickUp(List<GameObject> cubeSide)
     {
         fg = cubeSide;
+        rubicSumPosition = Vector3.zero;
+
+
+
         foreach (GameObject face in cubeSide)
         {
-            
-                rubicSumPosition += face.transform.position;
 
-                rubicCenter = rubicSumPosition / pieceRoot.transform.childCount;
-                GameObject g = new GameObject("G");
-                g.transform.position = rubicCenter;
+            rubicSumPosition += face.transform.position;
+           
         }
+        GameObject g = new GameObject("G");
+        rubicCenter = rubicSumPosition / cubeSide.Count;
+        g.transform.position = rubicCenter;
     }
 }

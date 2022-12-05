@@ -20,7 +20,7 @@ public class SelectFace : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            readState.ReadState();
+          //  readState.ReadState();
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
