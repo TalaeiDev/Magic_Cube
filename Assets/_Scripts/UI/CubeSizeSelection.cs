@@ -20,6 +20,7 @@ public class CubeSizeSelection : MonoBehaviour
     public void LoadGame()
     {
         GameManager.Instance.playerSettings.rubicSize = (int)slider.value;
+        GameManager.Instance.playerSettings.timer = GameManager.Instance.playerSettings.rubicSize * 40;
         SceneManager.LoadSceneAsync(1);
     }
 }

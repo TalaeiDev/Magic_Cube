@@ -15,11 +15,11 @@ MonoBehaviour:
   rubicSize: 2
   pieceSpace: 1
   pieceRotateSpeed: 0.25
-  scramblTime: 2
-  ScramblRotationSpeed: 0.2
+  scramblTime: 15
+  ScramblRotationSpeed: 0.25
   cameraDragSpeed: 0.25
   cameraRotateSpeed: 100
-  timer: 60
+  timer: 80
   pieceObject: {fileID: 1957968625906108892, guid: 05a46c263ffa96241b29d49241e190a5, type: 3}
   emptyTransfrom: {fileID: 6308564083637642432, guid: e57add10b71b426408ea371170b4f0ab, type: 3}
   startMenu: {fileID: 7932033840811770236, guid: 771d97e8c4f734e488ee303df27c715e, type: 3}
