@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae57987c5114307478970627b9030e35, type: 3}
+  m_Name: PlayerSetting
+  m_EditorClassIdentifier: 
+  rubicSize: 2
+  pieceSpace: 1
+  pieceRotateSpeed: 0.25
+  scramblTime: 2
+  ScramblRotationSpeed: 0.2
+  cameraDragSpeed: 0.25
+  cameraRotateSpeed: 100
+  timer: 60
+  pieceObject: {fileID: 1957968625906108892, guid: 05a46c263ffa96241b29d49241e190a5, type: 3}
+  emptyTransfrom: {fileID: 6308564083637642432, guid: e57add10b71b426408ea371170b4f0ab, type: 3}
+  startMenu: {fileID: 7932033840811770236, guid: 771d97e8c4f734e488ee303df27c715e, type: 3}
+  rubicSizeSelectionMenu: {fileID: 550907207843708900, guid: ac71e58c6acc2bf46958777a400fa731, type: 3}
+  winMenu: {fileID: 1390194910437536449, guid: 076e803789fffb948af62a210622d67a, type: 3}
+  gameOverMenu: {fileID: 1151074425695719782, guid: 8d91c59aca4066a4b90e6bc971d6a9da, type: 3}
+  gameMenu: {fileID: 3538817749239831611, guid: 1c98df46703b71b428bb62054297934b, type: 3}
+  faceLayer:
+    serializedVersion: 2
+    m_Bits: 64
