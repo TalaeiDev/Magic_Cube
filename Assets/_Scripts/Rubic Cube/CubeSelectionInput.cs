@@ -24,6 +24,7 @@ public class CubeSelectionInput : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.Scrambling || GameManager.Instance.win || GameManager.Instance.gameOver || GameManager.Instance.stop) return;
         if (input == _Input.Mouse)
             MouseButtonInput();
 
